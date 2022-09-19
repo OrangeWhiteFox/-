@@ -1,0 +1,25 @@
+e=7.389056098930650;A=[];z=0;B=[];C=[];D=[];E=[];o=0;F=[];d=0
+l=lambda x:len(x)
+for i in range(int(input())):
+ f=input()
+ if f[0]=='*':
+  if f[2]=='-':B+=[int(f[3:])]
+  elif f[2]=='0':z=1
+  else:A+=[int(f[2:])]
+ elif f[0]=='/':
+  if f[2]=='-':D+=[int(f[3:])]
+  else:C+=[int(f[2:])]
+ elif f[0]=='^':
+  if f[2]=='-':F+=[int(f[3:])]
+  elif f[2]=='0':o=1
+  else:E+=[int(f[2:])]
+d+=l(A)*l(C)*2+l(A)*l(F)+l(B)*l(D)*2+l(B)*l(E)+l(C)*l(E)+l(D)*l(F)+(l(A)+l(B)+l(C)+l(D))*o-2*(l(set(A)&set(C)&set(E))+l(set(B)&set(D)&set(F)));A.sort();E.sort();B.sort();F.sort();C.sort();D.sort()
+if l(A)+l(B)+z>1:d+=1
+if l(E)+l(F)+o>1:d+=1
+def g(X,Y,N):
+	j=0;global d
+	for i in range(l(X)):
+		d+=j*2
+		while j<l(Y) and X[i]>Y[j]*N:d+=2;j+=1
+		if N==1 and j<l(Y) and X[i]==Y[j]:d+=1
+g(A,E,1);g(B,F,1);g(D,E,e);g(C,F,e);print(d)
