@@ -1,0 +1,25 @@
+import math
+import decimal
+decimal.getcontext().prec=50
+d=lambda x:decimal.Decimal(str(x))
+def s(t):
+    u=d(t)-d(int(d(t)//d(6.28318530717958647692528676655900576839433879875))*628318530717958647692528676655900576839433879875/d(10**47))
+    S=0
+    for i in range(35):
+        n=2*i+1;f=1
+        for j in range(n):f*=j+1
+        S+=(-1)**i*(d(u)**n)/d(f)
+    return S
+def C(t):
+    u=d(t)-d(int(d(t)//d(6.28318530717958647692528676655900576839433879875))*628318530717958647692528676655900576839433879875/d(10**47))
+    S=0
+    for i in range(35):
+        n=2*i;f=1
+        for j in range(n):f*=j+1
+        S+=(-1)**i*(d(u)**n)/d(f)
+    return S
+a,b,c=map(int,input().split())
+x=0
+while a*x+b*math.sin(x)-c<0:x+=1
+for i in range(0,100):x=d(-a*x-b*s(x)+c)/(d(a+b*C(x)))+x
+print(round(x,6))
